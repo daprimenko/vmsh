@@ -7,13 +7,13 @@
 <body>
     <div><h1><a href="/">ВМШ при ВМК</a></h1></div>
 
-    <div>
-        <p>дата: 14.06.2014, 12:14</p>
-        <h2><a href="">Первая новость</a></h2>
-        <p>
-            Сайт заработал — даже есть какой-то текст на нем. Но содержательного пока ничего. Совсем ничего, к сожалению.
-        </p>
+    {% for post in posts %}
+        <div>
+        <p>дата публикации: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
     </div>
+    {% endfor %}
 
 </body>
 </html>
