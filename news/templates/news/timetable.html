@@ -1,0 +1,42 @@
+{% extends 'news/base.html' %}
+
+
+{% block title %}
+Расписание
+{% endblock %}
+
+
+{% block content %}
+<table>
+    <thead>
+    <tr>
+        <th>Класс</th>
+        <th>Предмет</th>
+        <th>День недели</th>
+        <th>Время</th>
+        <th>Аудитория</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="3">8</td>
+        <td>математика</td>
+        <td>четверг</td>
+        <td>18:00</td>
+        <td>687</td>
+    </tr>
+    <tr>
+        <td>физика</td>
+        <td>четверг</td>
+        <td>16:20</td>
+        <td>503</td>
+    </tr>
+    <tr>
+        <td>информатика</td>
+        <td>понедельник</td>
+        <td>16:20</td>
+        <td>607 и 758</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
