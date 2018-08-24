@@ -26,9 +26,12 @@
         <div class="container">
             <div class="menu-bar">
                 <ul>
-                    <li><a href="/about">О сайте</a></li>
-                    <li><a href="/news">Новости</a></li>
-                    <li><a href="/timetable">Расписание</a></li>
+                    <li><a href="{% url 'about' %}">О сайте</a></li>
+                    <li><a href="{% url 'news_page' %}">Новости</a></li>
+                    <li><a href="{% url 'timetable' %}">Расписание</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="content">
