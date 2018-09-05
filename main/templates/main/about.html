@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+О сайте
+{% endblock %}
+
+
+{% block content %}
+{% for post in about_posts %}
+{{ post.text|safe }}
+{% endfor %}
+{% endblock %}

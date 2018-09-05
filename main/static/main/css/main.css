@@ -5,7 +5,7 @@
 }
 .header .container{
     height: 120px;
-    background-image: url(./mgu_colored.jpg);
+    background-image: url(./img/mgu_colored.jpg);
     background-repeat: norepeat;
     background-position: center center;
     background-size: cover;
@@ -81,13 +81,13 @@
 }
 .main table {
     text-align: center;
-    border: 2px solid grey;
+    /*border: 2px solid grey;*/
     border-collapse: collapse;
     background: Silver;
     margin: auto;
 }
 .main th {
-    border: 2px solid grey;
+    border: 1px solid lightgrey;
     padding: 7px 15px;
 }
 .main table td {

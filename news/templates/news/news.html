@@ -1,4 +1,4 @@
-{% extends 'news/base.html' %}
+{% extends 'main/base.html' %}
 
 
 {% block title %}
@@ -7,6 +7,11 @@
 
 
 {% block content %}
+
+{% if user.is_authenticated %}
+    <h2><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a></h2>
+{% endif %}
+
 {% for post in posts %}
 <div class="post">
     <div class="date">

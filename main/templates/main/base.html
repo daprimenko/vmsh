@@ -13,7 +13,7 @@
     <title>{% block title %}{% endblock %} | ВМШ</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="{% static 'css/news.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'main/css/main.css' %}" type="text/css" rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -29,9 +29,6 @@
                     <li><a href="{% url 'about' %}">О сайте</a></li>
                     <li><a href="{% url 'news_page' %}">Новости</a></li>
                     <li><a href="{% url 'timetable' %}">Расписание</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a></li>
-                    {% endif %}
                 </ul>
             </div>
             <div class="content">

@@ -4,12 +4,8 @@ from .models import Post
 from .forms import PostForm
 
 
-def main(request):
-    return redirect('news_page')
-
-
 def news_page(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'news/news.html', {'posts': posts})
 
 
@@ -46,10 +42,3 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'news/post_edit.html', {'form': form})
 
-
-def about(request):
-    return render(request, 'news/about.html', {})
-
-
-def timetable(request):
-    return render(request, 'news/timetable.html', {})

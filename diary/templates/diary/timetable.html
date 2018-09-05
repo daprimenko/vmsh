@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Расписание
+{% endblock %}
+
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Класс</th>
+            <th>День недели</th>
+            <th>Предмет</th>
+            <th>Время</th>
+            <th>Аудитория</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for grade in object_list %}
+            <tr>
+            <td rowspan="{{ grade.number_of_subjects }}">{{ grade.number }}</td>
+                {% for day in grade.get_ordered_list %}
+                    <td rowspan="{{ day.0 }}">{{ day.1 }}</td>
+                    {% for subject in day.2 %}
+                    <td>{{ subject.name }}</td>
+                    <td>{{ subject.time }}</td>
+                    <td>{{ subject.room }}</td>
+                    </tr><tr>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
