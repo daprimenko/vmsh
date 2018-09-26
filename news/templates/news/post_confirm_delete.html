@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Удаление записи | Новости
+{% endblock %}
+
+
+{% block content %}
+<div class="post border-bottom">
+    <div class="date">
+        <p>Опубликовано: {{ post.published_date }}</p>
+    </div>
+    <h3><a class="text-dark" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+    <p>{{ post.text|linebreaksbr }}</p>
+</div>
+    <form class="delete-confirm" method="POST">{% csrf_token %}
+        <div class="container mx-0 ml-md-10 mt-3 mt-md-5">
+            <h5 class="mb-3">Вы действительно хотите удалить эту запись?</h5>
+            <button type="submit" class="delete btn btn-default ml-2">Удалить</button>
+        </div>
+    </form>
+{% endblock %}

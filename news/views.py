@@ -1,44 +1,68 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.urlresolvers import reverse_lazy
+
 from .models import Post
-from .forms import PostForm
 
 
-def news_page(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'news/news.html', {'posts': posts})
+class NewsView(ListView):
+    model = Post
+    template_name = 'news/news.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return self.model.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'news/post_detail.html', {'post': post})
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'news/post_detail.html'
+    context_object_name = 'post'
 
 
-def post_new(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'news/post_edit.html', {'form': form})
+class PostNew(PermissionRequiredMixin, CreateView):
+    permission_required = 'news.add_post'
+    model = Post
+    fields = ['title', 'text']
+    template_name = 'news/post_edit.html'
+    success_url = reverse_lazy('news_page', urlconf='news.urls')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.published_date = timezone.now()
+        return super(PostNew, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostNew, self).get_context_data(**kwargs)
+        context['form_title'] = 'Добавление новости'
+        context['page_title'] = 'Новая запись'
+        return context
 
 
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'news/post_edit.html', {'form': form})
+class PostEdit(PermissionRequiredMixin, UpdateView):
+    permission_required = 'news.change_post'
+    model = Post
+    fields = ['title', 'text']
+    template_name = 'news/post_edit.html'
+    success_url = reverse_lazy('news_page', urlconf='news.urls')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.published_date = timezone.now()
+        return super(PostEdit, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostEdit, self).get_context_data(**kwargs)
+        context['form_title'] = 'Редактирование новости'
+        context['page_title'] = 'Редактирование'
+        return context
+
+
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'news.delete_post'
+    model = Post
+    success_url = reverse_lazy('news_page')
+    template_name = 'news/post_confirm_delete.html'
 

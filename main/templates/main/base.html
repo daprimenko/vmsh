@@ -1,45 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
 {% load static %}
-<!--
-Ширина сайта
-Фотка/картинка/логотип для шапки
-Добавить цвета и объема
-Загрузить шрифты
-Личный кабинет — разобраться с position
--->
+{% load menu_items %}
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="https://getbootstrap.com/favicon.ico">-->
+
     <title>{% block title %}{% endblock %} | ВМШ</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Font Awesome icons-->
+    <link href="{% static 'main/css/all.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
     <link href="{% static 'main/css/main.css' %}" type="text/css" rel="stylesheet">
 </head>
-<body>
-    <div class="header">
-        <div class="container">
-            <h1>ВМШ</h1>
-            <h5>Вечерняя математическая школа при факультете ВМК МГУ им. М.В.Ломоносова</h5>
-        </div>
-    </div>
-    <div class="main">
-        <div class="container">
-            <div class="menu-bar">
-                <ul>
-                    <li><a href="{% url 'about' %}">О сайте</a></li>
-                    <li><a href="{% url 'news_page' %}">Новости</a></li>
-                    <li><a href="{% url 'timetable' %}">Расписание</a></li>
-                </ul>
-            </div>
-            <div class="content">
-                    {% block content %}
-                    {% endblock %}
-                <footer>
-                    &copy; Применко Д.А., 2018
-                </footer>
-            </div>
-        </div>
-    </div>
 
-</body>
+  <body>
+  <div class="d-flex sticky-top flex-row p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+      <h5 class="my-0 py-3 mr-auto font-weight-normal">
+          ВМШ
+          <div class="d-none d-md-inline"> при ВМК МГУ&nbspим.&nbspМ.В.&nbspЛомоносова</div>
+      </h5>
+
+      <nav class="navbar navbar-expand-sm my-0 md-1 ml-3">
+          <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                  data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                  aria-label="Toggle navigation">
+              <span class="fas fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse navbar-nav" id="navbarsExampleDefault">
+              {% menu_item 'Новости' 'news_page'%}
+              {% menu_item 'Расписание' 'timetable' %}
+              <!--{% menu_item 'Материалы' 'main' %}-->
+              {% menu_item 'О&nbspсайте' 'about' %}
+              {% if request.user.is_authenticated %}
+                {% menu_button request.user.username 'profile'%}
+              {% else %}
+                {% menu_button 'Личный кабинет' 'login'%}
+              {% endif %}
+          </div>
+      </nav>
+
+  </div>
+
+<!--  <div class="container-fluid">
+      <div class="row d-flex">
+  {% block sidebar %}
+  {% endblock %}
+
+  <main role="main">-->
+      <div class="container">
+        {% block content %}
+        {% endblock %}
+          <footer>
+            &copy; Применко Д.А., 2018
+          </footer>
+      </div>
+<!--
+  </main>
+      </div>
+  </div>-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+  </body>
 </html>

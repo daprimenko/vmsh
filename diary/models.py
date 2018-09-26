@@ -27,7 +27,7 @@ class Grade(models.Model):
     def number_of_subjects(self):
         return len(self.subject_set.all())
 
-    def get_ordered_list(self):
+    def get_timetable_list(self):
         ordered_list = []
         days = DayOfWeek.objects.filter(subject__grade__number=self.number).distinct()
         for cur_day in days:
@@ -56,15 +56,20 @@ class Subject(models.Model):
         verbose_name_plural = 'предметы'
         ordering = ['name']
 
-    def __str__(self):
+    def number_of_grades(self):
+        return len(self.grade.all())
+
+    def grades_as_string(self):
         grades = self.grade.order_by('number')
         is_first_grade = True
-        title_string = ''
+        grade_string = ''
         for grade in grades:
             if is_first_grade:
                 is_first_grade = False
             else:
-                title_string += ', '
-            title_string += str(grade.number)
+                grade_string += ', '
+            grade_string += str(grade.number)
+        return grade_string
 
-        return self.name+' – '+title_string
+    def __str__(self):
+        return self.name+' – '+self.grades_as_string()

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'news',
     'diary',
+    'registration',
 ]
 
 MIDDLEWARE = [

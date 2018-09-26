@@ -1,0 +1,119 @@
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0;
+}
+.header .container{
+    height: 120px;
+    background-image: url(./img/mgu_colored.jpg);
+    background-repeat: norepeat;
+    background-position: center center;
+    background-size: cover;
+    white-space: nowrap;
+}
+.header h1 {
+    color:  Silver;
+    font-size: 40px;
+    font-weight: 700;
+    padding-left: 40px;
+    padding-top: 35px;
+    padding-bottom: 5px;
+    margin: 0;
+}
+.header h5 {
+    padding-left: 25px;
+    margin: 0;
+    color: WhiteSmoke;
+    padding-bottom: 20px;
+}
+
+.menu-bar {
+    background: Gainsboro;
+    height: 70px;
+    width: 100%;
+    padding: 0;
+    padding-left: 20px;
+    margin: 0;
+}
+.menu-bar a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    height: 70px;
+    display: block;
+    padding: 0 15px;
+}
+.menu-bar ul {
+    height: 70px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    white-space: nowrap;
+}
+.menu-bar ul li {
+    font-size: 20px;
+    display: inline-block;
+    line-height: 70px;
+    list-style: none;
+}
+a.profile-ref {
+    font-weight: normal;
+    display: inline-block;
+    line-height: 70px;
+    list-style: none;
+}
+
+.menu-bar a:hover {
+    background: Silver;
+    cursor: pointer;
+    transition: background .5s;
+}
+.main .container{
+    background: WhiteSmoke;
+}
+.main .content {
+    margin: 0;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    text-align: justify;
+    font-size: 16px;
+}
+.main h2 {
+    font-size: 23px;
+}
+.main table {
+    text-align: center;
+    /*border: 2px solid grey;*/
+    border-collapse: collapse;
+    background: WhiteSmoke;
+    margin: auto;
+}
+.main th {
+    border: 1px solid lightgrey;
+    padding: 7px 15px;
+}
+.main table td {
+    border: 1px solid lightgrey;
+    padding: 5px 10px;
+}
+h2, .post h2 a, .post h2 a:visited{
+    color: Black;
+}
+.post {
+    font-size: 16px;
+}
+.post hr {
+    border-color: rgb(205,205,205);
+    margin-bottom: 0;
+}
+.post .date {
+    font-size: 13px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+footer {
+    padding-top: 40px;
+    font-size: 10px;
+}

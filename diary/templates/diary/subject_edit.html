@@ -2,17 +2,16 @@
 
 
 {% block title %}
-{{ page_title }} | Новости
+{{ page_title }} | Расписание
 {% endblock %}
 
 
 {% block content %}
-    <h3>{{ form_title }}</h3>
+<h3>{{ form_title }}</h3>
     <form method="POST" class="post-form">{% csrf_token %}
         <table class="table table-borderless table-responsive">
-        {{ form.as_table }}
+            {{ form.as_table }}
         </table>
         <button type="submit" class="save btn btn-default">Сохранить</button>
     </form>
-
 {% endblock %}

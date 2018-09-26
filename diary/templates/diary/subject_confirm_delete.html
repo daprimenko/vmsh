@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Удаление предмета | Расписание
+{% endblock %}
+
+
+{% block content %}
+<!--    <div class="container">
+        <div class="row">
+            <div class="col-auto">
+                <h5>Предмет:</h5>
+            </div>
+            <div class="col-auto">
+                <h5 class="font-weight-normal">{{ subject.name }}</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto">
+                <th scope="row"><h5>
+                {% if subject.number_of_grades == 1 %}
+                Класс:
+                {% else %}
+                Классы:
+                {% endif %}
+                </h5></th>
+            </div>
+            <div class="col-auto">
+                <h5 class="font-weight-normal">{{ subject.grades_as_string }}</h5>
+            </div>
+        </div>
+    </div>-->
+
+    <table class="table table-sm table-borderless table-responsive">
+        <tr>
+            <th scope="row"><h5>Предмет:</h5></th>
+            <td><h5 class="font-weight-normal">{{ subject.name }}</h5></td>
+        </tr>
+        <tr>
+            <th scope="row"><h5>
+                {% if subject.number_of_grades == 1 %}
+                Класс:
+                {% else %}
+                Классы:
+                {% endif %}
+            </h5></th>
+            <td><h5 class="font-weight-normal">{{ subject.grades_as_string }}</h5></td>
+        </tr>
+    </table>
+    <form class="delete-confirm" method="POST">{% csrf_token %}
+        <div class="container mx-0 ml-md-10 mt-3 mt-md-4">
+            <h5 class="mb-3">Вы действительно хотите удалить этот предмет?</h5>
+            <button type="submit" class="delete btn btn-default ml-2">Удалить</button>
+        </div>
+    </form>
+{% endblock %}
